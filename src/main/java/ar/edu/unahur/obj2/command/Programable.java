@@ -6,6 +6,8 @@ import ar.edu.unahur.obj2.command.comandos.Operable;
 
 public interface Programable {
 
+    //interfaz de microntrolador
+
     void run(List<Operable> operaciones);
 
     void incProgramCounter();
