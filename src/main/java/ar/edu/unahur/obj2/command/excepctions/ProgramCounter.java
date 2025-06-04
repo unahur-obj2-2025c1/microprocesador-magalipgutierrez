@@ -8,7 +8,7 @@ public abstract class ProgramCounter {
     }
     public void programCounter(MicroControladorBuilder micru){
         this.doProgCounter(micru);
-        micru.incrementarCounter(1);
+        micru.incProgramCounter();
     }
     public abstract void doProgCounter(MicroControladorBuilder micro);
 
