@@ -33,7 +33,7 @@ public class MicroControlador implements Programable {
     public Integer getCounter() {
         return counter;
     }
-
+//permite ejcutar una serie de operaciones-> un porgrama en definita 
     @Override
     public void run(List<Operable> operaciones) {
        
