@@ -8,7 +8,7 @@ import ar.edu.unahur.obj2.command.comandos.Operable;
 
 public class ProgramBuilder {
 
-    private List<Operable> programa;
+    private final List<Operable> programa;
     public ProgramBuilder(){
         this.programa= new ArrayList<>();
     }
@@ -23,6 +23,15 @@ public class ProgramBuilder {
     public ProgramBuilder ejecutarPrograma(Programable micro){
         micro.run(programa);
         return this;
+    }
+     public void setearAcumA(MicroControladorBuilder unMicro, Integer valor){
+        unMicro.setAcumuladorA(valor);
+    }
+    public void setearAcumB(MicroControladorBuilder unMicro, Integer valor){
+        unMicro.setAcumuladorB(valor);
+    }
+    public void setearAddr(MicroControladorBuilder unMicro, Integer valor){
+        unMicro.setAddr(valor);
     }
 
 }

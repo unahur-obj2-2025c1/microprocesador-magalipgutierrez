@@ -3,18 +3,21 @@ package ar.edu.unahur.obj2.command.comandos;
 import ar.edu.unahur.obj2.command.Programable;
 
 public class LODCommand implements Operable {
-    private final Integer addr = null;
+    
+    private  Integer addr = null;
     private Programable prevState;
+
+     
+    
+
+    public LODCommand(Integer addr) {
+        this.addr = addr;
+    }
 
     @Override
     public void execute(Programable micro) {
-        this.prevState = micro.copy();
-        // 1. Obtener el valor de la direc de  la memoria
-        Integer valorDememoria = micro.getAddr(addr); 
-        // Cargar ese valor en el Acumulador A
-        micro.setAcumuladorA(valorDememoria);
-        System.out.println("LODCommand: Cargando " + valorDememoria + " de Memoria[" + addr + "] a Acumulador A");
-        micro.incProgramCounter();// incrementa el counter del porgrama.
+        micro.setAcumuladorA(micro.getAddr(addr));
+        micro.incProgramCounter();
     }
 
     @Override

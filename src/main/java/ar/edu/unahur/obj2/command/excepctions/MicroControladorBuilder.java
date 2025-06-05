@@ -20,7 +20,7 @@ public final class MicroControladorBuilder implements Programable {
 
     // constructor
     public MicroControladorBuilder() {
-        reset(); // Inicializa el estado en el constructor
+        reset(); // Inicializa el estado en el constructor en 0
     }
 //permite ejcutar una serie de operaciones-> un porgrama en definita 
 // actua como Invoker- > ya que toma una lista de comandos y los ejecuta
