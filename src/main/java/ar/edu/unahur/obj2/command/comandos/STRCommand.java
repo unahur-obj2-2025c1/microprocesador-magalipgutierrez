@@ -18,6 +18,7 @@ public class STRCommand implements Operable {
         // Cast to your concrete implementation to access setMemoryValue
         if(prevState != null) {
             micro.setMemoryValue(addr, micro.getAcumuladorA());
+             System.out.println("STRCommand: Guardando " + micro.getAcumuladorA() + " en Memoria[" + addr + "]");
         } else {
             throw new UnsupportedOperationException("STRCommand requiere de un valor.");
         }

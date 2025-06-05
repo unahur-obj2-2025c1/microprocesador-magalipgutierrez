@@ -26,14 +26,20 @@ public final class MicroControladorBuilder implements Programable {
 // actua como Invoker- > ya que toma una lista de comandos y los ejecuta
     @Override
     public void run(List<Operable> operaciones) {
+       // operaciones.stream().
        for (int i = 0; i < operaciones.size(); i++) {
             // Se asume que el PC se incrementa DESPUÉS de ejecutar la instrucción.
             // Para que el PC apunte a la instrucción que causó el error,
             // no lo incrementamos hasta que la operación sea exitosa.
+            System.out.println("PC ANTES de ejecución de " + operaciones.get(i).getClass().getSimpleName() + ": " + this.programCounter);
+            System.out.println("Estado antes: A=" + acumuladorA + ", B=" + acumuladorB + ", Mem[0]=" + (memoriaDatos.size() > 0 ? memoriaDatos.get(0) : "N/A"));
             this.programCounter = i; // El PC apunta a la instrucción actual
         try {
                 Operable operacion = operaciones.get(i);
                 operacion.execute(this); // 'this' es el propio Microcontrolador (Receptor)
+                System.out.println("PC DESPUES de ejecución de " + operaciones.get(i).getClass().getSimpleName() + ": " + getProgramCounter()); // Nota: aquí el PC ya fue incrementado por el comando
+                System.out.println("Estado despues: A=" + acumuladorA + ", B=" + acumuladorB + ", Mem[0]=" + (memoriaDatos.size() > 0 ? memoriaDatos.get(0) : "N/A"));
+                System.out.println("---");
             } catch (IllegalArgumentException e) {
                 // Manejo de errores de acceso a memoria fuera de rango
                 System.err.println("Error de ejecución en PC " + this.programCounter + ": " + e.getMessage());

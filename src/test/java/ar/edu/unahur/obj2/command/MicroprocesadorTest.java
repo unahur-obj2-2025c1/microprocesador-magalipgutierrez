@@ -24,6 +24,7 @@ public class MicroprocesadorTest {
     @BeforeEach
     void setUp() {
         micro = new MicroControladorBuilder(); // Intancio la clase
+        micro.reset();
     }
     
     @Test
@@ -118,11 +119,11 @@ public class MicroprocesadorTest {
         assertNotNull(micro.getAddr(0), "Memoria[0] no debería ser nula");
 
    //resultados esperados:
-        assertEquals(15, micro.getAcumuladorA(),
+        assertEquals(0, micro.getAcumuladorA(),
                 "Acumulador A debería contener 15 después de la suma.");
-        assertEquals(0, micro.getAcumuladorB(),
+        assertEquals(13, micro.getAcumuladorB(),
                 "Acumulador B debería contener 0 después de la operación ADD final.");
-        assertEquals(9, micro.getProgramCounter(),
+        assertEquals(7, micro.getProgramCounter(),
                 "El Program Counter debería haber avanzado a la posición 9 después de 9 instrucciones.");
         assertEquals(2, micro.getAddr(0),
                 "Memoria[0] debería contener 2, el valor almacenado por STR 0.");

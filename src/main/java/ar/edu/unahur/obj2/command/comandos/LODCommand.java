@@ -13,6 +13,7 @@ public class LODCommand implements Operable {
         Integer valorDememoria = micro.getAddr(addr); 
         // Cargar ese valor en el Acumulador A
         micro.setAcumuladorA(valorDememoria);
+        System.out.println("LODCommand: Cargando " + valorDememoria + " de Memoria[" + addr + "] a Acumulador A");
         micro.incProgramCounter();// incrementa el counter del porgrama.
     }
 
