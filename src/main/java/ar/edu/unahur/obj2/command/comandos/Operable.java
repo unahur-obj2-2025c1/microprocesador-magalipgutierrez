@@ -5,7 +5,7 @@ import ar.edu.unahur.obj2.command.Programable;
 public interface Operable {
 
 
-    //movimiento comand
+    //movimiento comand-> Command Interface
     // si el microoperador no lo puedo tener por aributo lo paso por parametro
     
 

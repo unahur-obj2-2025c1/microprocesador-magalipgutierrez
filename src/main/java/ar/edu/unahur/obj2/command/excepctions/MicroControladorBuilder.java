@@ -7,9 +7,11 @@ import ar.edu.unahur.obj2.command.Programable;
 import ar.edu.unahur.obj2.command.comandos.Operable;
 
 public final class MicroControladorBuilder implements Programable {
+        //Receptor
+
    private Integer acumuladorA;
     private Integer acumuladorB;
-    private Integer programCounter;
+    private Integer programCounter; // aca esta el pc
     private List<Integer> memoriaDatos= new ArrayList<>(); // Área de 1024 valores -> array  de Adrr
     // ctes-> la memoria
     private static final int MEMORIA_SIZE = 1024;
@@ -21,6 +23,7 @@ public final class MicroControladorBuilder implements Programable {
         reset(); // Inicializa el estado en el constructor
     }
 //permite ejcutar una serie de operaciones-> un porgrama en definita 
+// actua como Invoker- > ya que toma una lista de comandos y los ejecuta
     @Override
     public void run(List<Operable> operaciones) {
        for (int i = 0; i < operaciones.size(); i++) {
@@ -47,7 +50,7 @@ public final class MicroControladorBuilder implements Programable {
 
     @Override
     public void incProgramCounter() {
-        this.programCounter++;;
+        this.programCounter++;
     }
 
     @Override
@@ -101,7 +104,8 @@ public final class MicroControladorBuilder implements Programable {
         this.acumuladorA = 0;
         this.acumuladorB = 0;
         this.programCounter = 0;
-        this.memoriaDatos = new ArrayList<>();
+        this.memoriaDatos = new ArrayList<>(MEMORIA_SIZE);
+        for (int i=0; i< MEMORIA_SIZE;i++){ memoriaDatos.add(0);}
         // Opcional: inicializar to la memoria a 0 o null
         //Arrays.fill(this.memoriaDatos, 0); -> no funciona, ver 
     }
@@ -127,6 +131,20 @@ public final class MicroControladorBuilder implements Programable {
       
         return addr != null && addr >= MEMORIA_MIN_ADDR && addr <= MEMORIA_MAX_ADDR;
     }
+
+    @Override
+    public void setMemoryValue(Integer address, Integer value) {
+        if (!esValidAddress(address)) {
+            throw new IllegalArgumentException("Dirección de memoria fuera de rango: " + address);
+            }
+                    // Asegurarse q haya corte, 
+        while (memoriaDatos.size() <= address) {
+                memoriaDatos.add(0); // Rellena con ceros el tamaño de la lista
+                    }
+                    //List y set(index, value)
+                    //reemplaza el elemento en la posición index con element
+        memoriaDatos.set(address, value);
+    }      
 }
     
 

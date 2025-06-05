@@ -6,7 +6,7 @@ import ar.edu.unahur.obj2.command.comandos.Operable;
 
 public interface Programable {
 
-    //interfaz de microntrolador
+    //interfaz de microntrolador- > interfaz del receptor
 
     void run(List<Operable> operaciones);
 
@@ -31,4 +31,6 @@ public interface Programable {
     void setAddr(Integer addr);
 
     Integer getAddr(Integer addr);
+
+    void setMemoryValue(Integer address, Integer valor);
 }

@@ -2,7 +2,10 @@ package ar.edu.unahur.obj2.command.comandos;
 
 import ar.edu.unahur.obj2.command.Programable;
 
-public abstract class  ADDCommand implements Operable{
+public class  ADDCommand implements Operable{
+
+        //Concrete Commands
+
    // Para guardar el estado del microcontrolador antes de la ejecucion
     private Programable prevState;
 
