@@ -1,5 +1,6 @@
 package ar.edu.unahur.obj2.command.comandos;
 
+
 import ar.edu.unahur.obj2.command.Programable;
 
 public class  ADDCommand implements Operable{
@@ -34,11 +35,11 @@ public class  ADDCommand implements Operable{
         } else {
             // Si no hay estado previo (ej. el comando no se ejecutó o no se guardo),
             //  lanza una excepcion 
-            System.err.println("No se puede deshacer ADDCommand: no hay estado previo guardado.");
+            System.err.println("No se puede deshacer: no hay estado previo registrado.");
         }
     }
 
-   
+    
 
     
 }

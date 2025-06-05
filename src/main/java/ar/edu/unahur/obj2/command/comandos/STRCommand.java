@@ -1,26 +1,25 @@
 package ar.edu.unahur.obj2.command.comandos;
 
 import ar.edu.unahur.obj2.command.Programable;
-import ar.edu.unahur.obj2.command.excepctions.MicroControladorBuilder;
 
 
 public class STRCommand implements Operable {
     //Concrete Commands
-    private final Integer address;
+    private final Integer addr;
     private Programable prevState;
 
-    public STRCommand(Integer address) {
-        this.address = address;
+    public STRCommand(Integer direccion) {
+        this.addr = direccion;
     }
 
     @Override
     public void execute(Programable micro) {
         this.prevState = micro.copy();
         // Cast to your concrete implementation to access setMemoryValue
-        if (micro instanceof MicroControladorBuilder) {
-            ((MicroControladorBuilder) micro).setMemoryValue(address, micro.getAcumuladorA());
+        if(prevState != null) {
+            micro.setMemoryValue(addr, micro.getAcumuladorA());
         } else {
-            throw new UnsupportedOperationException("STRCommand requires MicroControladorBuilder to set memory value.");
+            throw new UnsupportedOperationException("STRCommand requiere de un valor.");
         }
         micro.incProgramCounter();
     }

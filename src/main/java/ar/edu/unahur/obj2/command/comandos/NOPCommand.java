@@ -19,7 +19,7 @@ public class NOPCommand implements Operable{
             micro.copyFrom(this.prevState);
     } else {
             // Si no hay estado previo, el comando no pudo ser ejecutado
-            System.err.println("No se puede deshacer NOPCommand: no hay estado previo guardado.");
+            System.err.println("No se puede deshacer NOPCommand: no hay estado previo registrado.");
         }
     }
 
