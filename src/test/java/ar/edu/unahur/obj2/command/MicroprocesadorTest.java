@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unahur.obj2.command.comandos.ADDCommand;
+import ar.edu.unahur.obj2.command.comandos.IFNZ;
 import ar.edu.unahur.obj2.command.comandos.LODCommand;
 import ar.edu.unahur.obj2.command.comandos.LODVCommand;
 import ar.edu.unahur.obj2.command.comandos.NOPCommand;
@@ -130,4 +131,35 @@ public class MicroprocesadorTest {
         System.out.println("PC final: " + micro.getProgramCounter());
         System.out.println("Memoria[0] final: " + micro.getAddr(0));
     }
+    @Test
+    @DisplayName("Instrucciones de más alto nivel")
+    void testEjecutandoprograma_IFNZ(){
+        ProgramBuilder builder = new ProgramBuilder();
+           // Programa simple con IFNZE
+        List<Operable> ifnzPrograma = new ArrayList<>();
+        ifnzPrograma.add(new ADDCommand());
+        ifnzPrograma.add(new NOPCommand());
+
+        builder.agregarInstruccion(new LODVCommand(5)) // Acumulador A = 5
+               .agregarInstruccion(new LODVCommand(10)) // Acumulador A = 10 (se sobreescribe el 5)
+               .agregarInstruccion(new ADDCommand()) // A = 10 + 0 = 10 (B es 0 por default)
+               .agregarInstruccion(new LODVCommand(0)) // A = 0
+               .agregarInstruccion(new IFNZ(ifnzPrograma)); // No se ejecuta el ADD y NOP
+
+        builder.ejecutarPrograma(micro);
+
+        assertEquals(0, micro.getAcumuladorA());
+        assertEquals(0, micro.getAcumuladorB());
+
+        List<Operable> ifnz2 = new ArrayList<>();
+        ifnz2.add(new ADDCommand()); // A = 5 + 0 = 5
+        ifnz2.add(new LODVCommand(100)); // A = 100
+        builder.agregarInstruccion(new LODVCommand(5)) // A = 5
+               .agregarInstruccion(new IFNZ(ifnz2));
+        builder.ejecutarPrograma(micro);
+        assertEquals(100, micro.getAcumuladorA());
+        assertEquals(0, micro.getAcumuladorB());
+    }
+
+
 }

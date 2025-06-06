@@ -24,6 +24,9 @@ public class ProgramBuilder {
         micro.run(programa);
         return this;
     }
+      public void undoLastInstruction(Programable micro) {
+        micro.undoLast();
+    }
      public void setearAcumA(MicroControladorBuilder unMicro, Integer valor){
         unMicro.setAcumuladorA(valor);
     }
@@ -33,5 +36,6 @@ public class ProgramBuilder {
     public void setearAddr(MicroControladorBuilder unMicro, Integer valor){
         unMicro.setAddr(valor);
     }
+    
 
 }

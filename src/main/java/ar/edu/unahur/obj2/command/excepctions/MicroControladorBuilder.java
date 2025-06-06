@@ -2,6 +2,7 @@ package ar.edu.unahur.obj2.command.excepctions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import ar.edu.unahur.obj2.command.Programable;
 import ar.edu.unahur.obj2.command.comandos.Operable;
@@ -18,6 +19,8 @@ public final class MicroControladorBuilder implements Programable {
     private static final int MEMORIA_MIN_ADDR = 0;
     private static final int MEMORIA_MAX_ADDR = MEMORIA_SIZE - 1;
 
+     // Pila para el historial de comandos ejecutados
+    private Stack<Operable> executedCommands;
     // constructor
     public MicroControladorBuilder() {
         reset(); // Inicializa el estado en el constructor en 0
@@ -126,6 +129,23 @@ public final class MicroControladorBuilder implements Programable {
                     //List y set(index, value)
                     //reemplaza el elemento en la posición index con element
         memoriaDatos.set(addr, valor);
+    }
+    @Override
+    public void undoLast() {
+        if (!executedCommands.isEmpty()) {
+            Operable lastCommand = executedCommands.pop(); // Obtiene y elimina el último comando
+            lastCommand.undo(this); // Deshace la operación
+            System.out.println("Se ha deshecho la última operación.");
+        } else {
+            System.out.println("No hay operaciones para deshacer.");
+        }
+    }
+    @Override
+    public Operable getLastExecutedCommand() {
+         if (executedCommands.isEmpty()) {
+            return null;
+        }
+        return executedCommands.peek(); // Solo retorna el último sin sacarlo de la pila
     }      
 }
     

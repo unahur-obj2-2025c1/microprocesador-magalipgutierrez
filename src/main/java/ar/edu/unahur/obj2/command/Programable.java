@@ -33,4 +33,9 @@ public interface Programable {
     Integer getAddr(Integer addr);
 
     void setMemoryValue(Integer address, Integer valor);
+
+     // para deshacer la última operación
+    void undoLast();
+    // para obtener la última operación ejecutada
+    Operable getLastExecutedCommand();
 }
